@@ -21,16 +21,20 @@ public class User {
     public User(){}
     public User(DtoUserRegister dtoUserRegister){
         this.nome = dtoUserRegister.nome();
-//        this.email = generatedEmail(dtoUserRegister.nome());
-        this.email = "teste";
+        this.email = generatedEmail(dtoUserRegister.nome());
         this.idade = dtoUserRegister.idade();
         this.endereco = new Endereco(dtoUserRegister.dtoEnderecoRegister());
     }
 
-//    public String generatedEmail(String nome){
-//        this.nome = nome;
-//
-//    }
+    public String generatedEmail(String nome){
+        var name = this.nome = nome;
+        String[] partesNomes = name.strip().split("\\s+");
+        String firstName = partesNomes[0];
+        String secondName = partesNomes.length > 1 ? partesNomes[partesNomes.length -1] : partesNomes[0];
+        String email = firstName + "." + secondName + "@email.teste.com";
+        return email;
+
+    }
 
 
     public Long getId() {
