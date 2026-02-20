@@ -7,10 +7,14 @@ import com.example.api.user.User.API.model.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.Random;
 
 @Service
 public class UserService {
+
+    private Normalizer normalizer;
+
     @Autowired
     UserRepository userRepository;
 
@@ -24,6 +28,10 @@ public class UserService {
         return userRepository.save(user);
     }
     public String generatedEmail(String nome){
+        Normalizer.normalize(nome, Normalizer.Form.NFD);
+        nome = Normalizer.normalize(nome, Normalizer.Form.NFD);
+        nome = nome.replaceAll("\\p{M}", "");
+
         String[] partesNomes = nome.toLowerCase().strip().split("\\s+");
         System.out.println(partesNomes);
         String firstName = partesNomes[0];
