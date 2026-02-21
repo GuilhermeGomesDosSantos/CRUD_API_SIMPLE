@@ -50,4 +50,11 @@ public class ControllerRegister {
         return ResponseEntity.ok(new DtoUserDetails(userId));
     }
 
+    @DeleteMapping("deleterUser/{id}")
+    public ResponseEntity deleterUser (@PathVariable Long id){
+        userRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
